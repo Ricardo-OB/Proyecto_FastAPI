@@ -51,23 +51,29 @@ def test_crear_usuario():
         "correo": "a@mgil",
         "creacion_user": "2022-08-02T17:48:07.679221"
     }
-    response_sin_token = cliente.post('/user/crear_usuario', json=usuario)
-    assert response_sin_token.status_code == 401
+    ## Test sin token:
+    response = cliente.post('/user/crear_usuario', json=usuario)
+    assert response.status_code == 201
+    assert response.json()['Respuesta'] == 'usuario creado satisfactoriamente'
+    
+    ## Test con token:
+    # response_sin_token = cliente.post('/user/crear_usuario', json=usuario)
+    # assert response_sin_token.status_code == 401
 
-    usuario_login = {
-        'username': 'prueba',
-        'password': 'prueba123'
-    }
-    response_token = cliente.post('/login/', data=usuario_login)
-    assert response_token.status_code == 200
-    assert response_token.json()['token_type'] == 'bearer'
+    # usuario_login = {
+    #     'username': 'prueba',
+    #     'password': 'prueba123'
+    # }
+    # response_token = cliente.post('/login/', data=usuario_login)
+    # assert response_token.status_code == 200
+    # assert response_token.json()['token_type'] == 'bearer'
 
-    headers = {
-        'Authorization': f"Bearer {response_token.json()['access_token']}"
-    }
-    response_con_token = cliente.post('/user/crear_usuario', json=usuario, headers=headers)
-    assert response_con_token.status_code == 201
-    assert response_con_token.json()['Respuesta'] == 'usuario creado satisfactoriamente'
+    # headers = {
+    #     'Authorization': f"Bearer {response_token.json()['access_token']}"
+    # }
+    # response_con_token = cliente.post('/user/crear_usuario', json=usuario, headers=headers)
+    # assert response_con_token.status_code == 201
+    # assert response_con_token.json()['Respuesta'] == 'usuario creado satisfactoriamente'
 
 def test_obtener_usuarios():
     response_sin_token = cliente.get('/user/')
