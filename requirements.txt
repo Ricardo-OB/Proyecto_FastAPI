@@ -11,3 +11,4 @@ pytest
 requests
 coverage
 jinja2
+aiohttp

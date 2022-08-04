@@ -3,7 +3,12 @@
 {% block content %}
 
 <div class="container"> 
-
+    {% if msj|length > 1 %}
+        <div class="alert alert-{{type_alert}} alert-dismissible fade show" role="alert">
+            <strong>{{msj}}.</strong>
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
     <h1 class="text-center"> Formulario crear Usuario </h1>
     <form method="POST"> 
         <div class="mb-3"> 
