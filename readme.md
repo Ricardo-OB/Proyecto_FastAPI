@@ -40,3 +40,11 @@ Correr/ejecutar las siguiente dos lineas
 
     alembic revision --autogenerate -m "Create models"
     alembic upgrade heads
+
+# Desplegando App en Heroku
+
+Descargar el CLI de Heroku
+
+    1. heroku login
+    2. heroku git:remote -a "Nombre de la App"
+    3. git push heroku master
